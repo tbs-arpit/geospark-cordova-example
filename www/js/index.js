@@ -34,17 +34,34 @@ var app = {
         }
         app.init();
     },
-
+    onGeoSparkEvents: function (userId, location) {
+        // do something with userId, location
+        console.log('Geo Stark Location Listener......');
+        console.log('userID : ' + userId + '\nLocation :' + JSON.stringify(location));
+        alert('Geo Stark Location Listener......\n' + 'userID : ' + userId + '\nLocation :' + JSON.stringify(location));
+    },
+    onGeoSparkError: function (error) {
+        // do something on error
+        console.log('Geo Stark Error Listener......');
+        console.log(JSON.stringify(error));
+        alert('Geo Stark Error Listener......\nError: \n' + JSON.stringify(error));
+    },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
     },
-
-     init: function(){
+    checkTrackStatus: function () {
+        cordova.plugins.geospark.isLocationTracking(function (status) {
+            alert(status);
+        });
+    },
+    init: function () {
         var localStorage = window.localStorage; 
         if(localStorage.getItem('INIT') == null){
             app.setLocalStorage('INIT', 'TRUE');
             app.setLocalStorage('USER_ID', null);
             app.setLocalStorage('TRACKING', null);
+            cordova.plugins.geospark.onEvents(app.onGeoSparkEvents);
+            cordova.plugins.geospark.onError(app.onGeoSparkError); 
         }
         app.buttonStatus();
     },

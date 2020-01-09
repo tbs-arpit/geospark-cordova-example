@@ -8,6 +8,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:enabled="true" android:exported="false" android:name="com.geospark.cordova.GeoSparkPlugin$GeoSparkCordovaReceiver">
+            <intent-filter>
+                <action android:name="com.geospark.android.RECEIVED" />
+            </intent-filter>
+        </receiver>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
