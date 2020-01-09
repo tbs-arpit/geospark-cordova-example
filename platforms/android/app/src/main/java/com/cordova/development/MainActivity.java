@@ -19,6 +19,7 @@
 
 package com.cordova.development;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.geospark.lib.GeoSpark;
@@ -31,6 +32,7 @@ public class MainActivity extends CordovaActivity {
         super.onCreate(savedInstanceState);
         GeoSpark.logger(this, true);
         GeoSpark.exportToFile(this);
+        startService(new Intent(this, ImplicitService.class));
         // enable Cordova apps to be started in the background
         Bundle extras = getIntent().getExtras();
         if (extras != null && extras.getBoolean("cdvStartInBackground", false)) {
