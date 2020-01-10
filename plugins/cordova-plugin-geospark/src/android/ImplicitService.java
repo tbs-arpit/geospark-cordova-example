@@ -1,4 +1,4 @@
-package com.cordova.development;
+package com.geospark.cordova;
 
 import android.app.Service;
 import android.content.Intent;

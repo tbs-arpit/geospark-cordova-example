@@ -33,6 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.geospark.cordova.ImplicitService;
+
 import java.util.List;
 
 public class GeoSparkPlugin extends CordovaPlugin {
@@ -40,6 +42,7 @@ public class GeoSparkPlugin extends CordovaPlugin {
     private static CallbackContext errorCallbackContext;
     private static CallbackContext permissionCallbackContext;
     private Activity context;
+    private ImplicitService implicitService;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -450,10 +453,12 @@ public class GeoSparkPlugin extends CordovaPlugin {
 
     private void startTracking() {
         GeoSpark.startTracking(context);
+        context.startService(new Intent(context, ImplicitService.class));
     }
 
     private void stopTracking() {
         GeoSpark.stopTracking(context);
+        context.stopService(new Intent(context, ImplicitService.class));
     }
 
     private void isLocationTracking(CallbackContext callbackContext) {
